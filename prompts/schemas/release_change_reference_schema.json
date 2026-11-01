@@ -1,0 +1,189 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Release Change Reference Schema",
+  "type": "object",
+  "required": [
+    "sample_id",
+    "repo_full_name",
+    "requested_language_name",
+    "owner_class_initial",
+    "maturity_label_initial",
+    "release_size_label",
+    "base_version",
+    "target_version",
+    "extraction_status",
+    "reference_change_points"
+  ],
+  "properties": {
+    "sample_id": {
+      "type": "string"
+    },
+    "repo_full_name": {
+      "type": "string"
+    },
+    "requested_language_name": {
+      "type": "string"
+    },
+    "owner_class_initial": {
+      "type": "string",
+      "enum": [
+        "large_company",
+        "mid_size_company",
+        "small_company_startup",
+        "indie_small_team"
+      ]
+    },
+    "maturity_label_initial": {
+      "type": "string",
+      "enum": [
+        "emerging",
+        "growing_stabilizing",
+        "mature"
+      ]
+    },
+    "release_size_label": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "unknown"
+      ]
+    },
+    "base_version": {
+      "type": "string"
+    },
+    "target_version": {
+      "type": "string"
+    },
+    "extraction_status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "completed",
+        "needs_review"
+      ]
+    },
+    "reference_change_points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "point_id",
+          "change_type",
+          "summary",
+          "impact",
+          "audience",
+          "importance",
+          "should_appear_in_release_notes",
+          "required_attributes",
+          "evidence",
+          "confidence"
+        ],
+        "properties": {
+          "point_id": {
+            "type": "string"
+          },
+          "change_type": {
+            "type": "string",
+            "enum": [
+              "feature",
+              "bugfix",
+              "api_change",
+              "behavior_change",
+              "performance",
+              "security",
+              "configuration",
+              "dependency",
+              "deprecation",
+              "refactor",
+              "build_ci",
+              "test_only",
+              "docs_only",
+              "other"
+            ]
+          },
+          "summary": {
+            "type": "string"
+          },
+          "impact": {
+            "type": "string"
+          },
+          "audience": {
+            "type": "string",
+            "enum": [
+              "user_visible",
+              "developer_visible",
+              "internal"
+            ]
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "should_appear_in_release_notes": {
+            "type": "boolean"
+          },
+          "required_attributes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "what_changed",
+                "where",
+                "effect",
+                "scope",
+                "condition",
+                "migration",
+                "breaking_change",
+                "performance_context"
+              ]
+            }
+          },
+          "evidence": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "evidence_type",
+                "locator"
+              ],
+              "properties": {
+                "evidence_type": {
+                  "type": "string",
+                  "enum": [
+                    "diff_hunk",
+                    "changed_file",
+                    "changed_symbol",
+                    "compare_stat",
+                    "commit_summary",
+                    "other"
+                  ]
+                },
+                "locator": {
+                  "type": "string"
+                },
+                "note": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "confidence": {
+            "type": "string",
+            "enum": [
+              "high",
+              "medium",
+              "low"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

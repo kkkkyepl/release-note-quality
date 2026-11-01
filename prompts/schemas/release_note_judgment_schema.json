@@ -1,0 +1,292 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Release Note Judgment Schema",
+  "type": "object",
+  "required": [
+    "sample_id",
+    "repo_full_name",
+    "requested_language_name",
+    "owner_class_initial",
+    "maturity_label_initial",
+    "release_size_label",
+    "base_version",
+    "target_version",
+    "evaluation_status",
+    "note_claims",
+    "fact_alignments",
+    "note_judgment"
+  ],
+  "properties": {
+    "sample_id": {
+      "type": "string"
+    },
+    "repo_full_name": {
+      "type": "string"
+    },
+    "requested_language_name": {
+      "type": "string"
+    },
+    "owner_class_initial": {
+      "type": "string",
+      "enum": [
+        "large_company",
+        "mid_size_company",
+        "small_company_startup",
+        "indie_small_team"
+      ]
+    },
+    "maturity_label_initial": {
+      "type": "string",
+      "enum": [
+        "emerging",
+        "growing_stabilizing",
+        "mature"
+      ]
+    },
+    "release_size_label": {
+      "type": "string",
+      "enum": [
+        "small",
+        "medium",
+        "large",
+        "unknown"
+      ]
+    },
+    "base_version": {
+      "type": "string"
+    },
+    "target_version": {
+      "type": "string"
+    },
+    "evaluation_status": {
+      "type": "string",
+      "enum": [
+        "in_progress",
+        "completed",
+        "needs_review"
+      ]
+    },
+    "note_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "claim_id",
+          "claim_text",
+          "support_label",
+          "linked_fact_ids",
+          "attribute_links"
+        ],
+        "properties": {
+          "claim_id": {
+            "type": "string"
+          },
+          "claim_text": {
+            "type": "string"
+          },
+          "claim_type_guess": {
+            "type": "string",
+            "enum": [
+              "feature",
+              "bugfix",
+              "api_change",
+              "behavior_change",
+              "performance",
+              "security",
+              "configuration",
+              "dependency",
+              "deprecation",
+              "refactor",
+              "build_ci",
+              "test_only",
+              "docs_only",
+              "mixed",
+              "other"
+            ]
+          },
+          "support_label": {
+            "type": "string",
+            "enum": [
+              "supported",
+              "partially_supported",
+              "unsupported",
+              "contradicted",
+              "too_vague",
+              "non_change"
+            ]
+          },
+          "linked_fact_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "attribute_links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "fact_id",
+                "covered_attributes"
+              ],
+              "properties": {
+                "fact_id": {
+                  "type": "string"
+                },
+                "covered_attributes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "what_changed",
+                      "where",
+                      "effect",
+                      "scope",
+                      "condition",
+                      "migration",
+                      "breaking_change",
+                      "performance_context"
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "claim_notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "fact_alignments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "fact_id",
+          "change_type",
+          "fact_summary",
+          "importance",
+          "should_appear_in_release_notes",
+          "required_attributes",
+          "coverage_label",
+          "covered_attributes",
+          "linked_claim_ids"
+        ],
+        "properties": {
+          "fact_id": {
+            "type": "string"
+          },
+          "change_type": {
+            "type": "string",
+            "enum": [
+              "feature",
+              "bugfix",
+              "api_change",
+              "behavior_change",
+              "performance",
+              "security",
+              "configuration",
+              "dependency",
+              "deprecation",
+              "refactor",
+              "build_ci",
+              "test_only",
+              "docs_only",
+              "other"
+            ]
+          },
+          "fact_summary": {
+            "type": "string"
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "critical"
+            ]
+          },
+          "should_appear_in_release_notes": {
+            "type": "boolean"
+          },
+          "required_attributes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "what_changed",
+                "where",
+                "effect",
+                "scope",
+                "condition",
+                "migration",
+                "breaking_change",
+                "performance_context"
+              ]
+            }
+          },
+          "coverage_label": {
+            "type": "string",
+            "enum": [
+              "covered",
+              "partially_covered",
+              "not_covered"
+            ]
+          },
+          "covered_attributes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "what_changed",
+                "where",
+                "effect",
+                "scope",
+                "condition",
+                "migration",
+                "breaking_change",
+                "performance_context"
+              ]
+            }
+          },
+          "linked_claim_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "omission_severity": {
+            "type": "string",
+            "enum": [
+              "none",
+              "minor",
+              "major",
+              "critical"
+            ]
+          },
+          "alignment_notes": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "note_judgment": {
+      "type": "object",
+      "required": [
+        "understandability_score"
+      ],
+      "properties": {
+        "understandability_score": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "understandability_notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}
