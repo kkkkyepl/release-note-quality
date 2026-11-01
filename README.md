@@ -58,4 +58,8 @@ python code/run_llm.py --requests-path requests_stage2.jsonl --output-dir runs/s
 python code/parse_model_outputs.py --raw runs/stage1/raw_responses.jsonl --output runs/stage1/reparsed_outputs.jsonl
 ```
 
+## Download
+
+The packaged study data and code are available on the
+[Releases page](https://github.com/kkkyepl/release-note-quality/releases/tag/v1.0.0).
 
