@@ -61,5 +61,5 @@ python code/parse_model_outputs.py --raw runs/stage1/raw_responses.jsonl --outpu
 ## Download
 
 The packaged study data and code are available on the
-[Releases page](https://github.com/kkkyepl/release-note-quality/releases/tag/v1.0.0).
+[Releases page](https://github.com/kkkkyepl/release-note-quality/releases/tag/v1.0.0).
 
